@@ -13,18 +13,22 @@ class News_Tile extends StatelessWidget {
         itemCount: 10,
         itemBuilder: (context, i) {
           return Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.only(top: 18.0, left: 16, right: 16),
             child: Container(
               width: double.infinity,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  ClipRRect(
-                      borderRadius: BorderRadius.circular(14.0),
-                      child: Image.asset(
-                        'assets/images/pic3.png',
-                        fit: BoxFit.cover,
-                      )),
+                  Container(
+                    width: double.infinity,
+                    height: 300,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(14.0),
+                        child: Image.asset(
+                          'assets/images/me.png',
+                          fit: BoxFit.cover,
+                        )),
+                  ),
                   SizedBox(
                     height: 15,
                   ),
