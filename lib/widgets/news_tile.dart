@@ -45,7 +45,7 @@ class News_Tile extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    'خبر محتوى عنوا محتوى عنوا محتوى عنوا محتوى عنوان',
+                    ' kkkkkkkkkkkkkkkkkkkk',
                     style: TextStyle(
                       color: Colors.grey[400],
                       fontSize: 16,
