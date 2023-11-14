@@ -1,16 +1,36 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:news_api_flutter/models/articale_model.dart';
+import 'package:news_api_flutter/services/api_news.dart';
 
-class News_Tile extends StatelessWidget {
-  const News_Tile({
+class News_Tile extends StatefulWidget {
+  News_Tile({
     super.key,
   });
+
+  @override
+  State<News_Tile> createState() => _News_TileState();
+}
+
+class _News_TileState extends State<News_Tile> {
+  List<ArticleModel> articles = [];
+  @override
+  void initState() {
+    super.initState();
+    getNewsFinal();
+  }
+
+  Future<void> getNewsFinal() async {
+    articles = await NewsService(dio: Dio()).getGeneralNews();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 10,
+        itemCount: articles.length,
         itemBuilder: (context, i) {
           return Padding(
             padding: const EdgeInsets.only(top: 18.0, left: 16, right: 16),
@@ -25,7 +45,7 @@ class News_Tile extends StatelessWidget {
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(14.0),
                         child: Image.asset(
-                          'assets/images/me.png',
+                          articles[i].image ?? 'assets/images/me.png',
                           fit: BoxFit.cover,
                         )),
                   ),
@@ -33,7 +53,8 @@ class News_Tile extends StatelessWidget {
                     height: 15,
                   ),
                   Text(
-                    'خبر خبر خبر خبر خبر عنووووااان عنوان خبر عنوان',
+                    maxLines: 2,
+                    articles[i].title,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 25,
@@ -45,10 +66,11 @@ class News_Tile extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    ' kkkkkkkkkkkkkkkkkkkk',
+                    maxLines: 2,
+                    articles[i].subtitle ?? 'Null DEscriPtion',
                     style: TextStyle(
-                      color: Colors.grey[400],
-                      fontSize: 16,
+                      color: Colors.grey[600],
+                      fontSize: 20,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
